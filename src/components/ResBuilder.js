@@ -12,11 +12,36 @@ async function getFile(url) {
   return buf;
 }
 
+const STORAGE_KEY_APPS = 'ngxson_apps';
+const STORAGE_KEY_RES = 'ngxson_res';
+
 class ResBuilder extends React.Component {
   state = {
     loading: false,
     res: null,
-    apps: [ 'hook-alarm-manager-by-MNVolkov.elf' ],
+    apps: [
+      'hook-alarm-manager-by-MNVolkov.elf',
+      'utility-calendar-by-MNVolkov.elf',
+      'utility-calculator-by-MNVolkov.elf',
+      'utility-flashlight-by-MNVolkov.elf',
+    ],
+  };
+
+  constructor(props) {
+    super(props);
+    const savedApps = JSON.parse(window.localStorage.getItem(STORAGE_KEY_APPS) || 'null');
+    if (savedApps) this.state.apps = savedApps.filter(a => !!files.app[a]);
+    const savedRes = JSON.parse(window.localStorage.getItem(STORAGE_KEY_RES) || 'null');
+    if (savedRes) this.state.res = savedRes;
+  }
+
+  componentDidUpdate() {
+    this.saveAppConfiguration();
+  }
+
+  saveAppConfiguration = () => {
+    window.localStorage.setItem(STORAGE_KEY_RES, JSON.stringify(this.state.res));
+    window.localStorage.setItem(STORAGE_KEY_APPS, JSON.stringify(this.state.apps));
   };
 
   addApp = (appName) => {
@@ -93,7 +118,12 @@ class ResBuilder extends React.Component {
   _renderFWSelect() {
     return <>
       <div className="col-sm-12 col-md-6 col-lg-6">
-        <select onChange={(e) => this.setState({ res: e.target.value })} className="form-select" defaultValue={null}>
+        <select
+          onChange={(e) => this.setState({ res: e.target.value })}
+          value={this.state.res}
+          className="form-select"
+          defaultValue={null}
+        >
           <option value={false}>...</option>
           {Object.keys(files.res).map(res => <option key={res} value={res}>{res}</option>)}
         </select>

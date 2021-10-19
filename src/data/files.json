@@ -27,6 +27,7 @@
     "utility-BipCounter-v2.4-by-erekoze.elf": {},
     "utility-BTNotes-v3.0-by-ngxson.elf": {},
     "utility-calculator-by-MNVolkov.elf": {},
+    "utility-calendar-by-MNVolkov.elf": {},
     "utility-flashlight-by-MNVolkov.elf": {},
     "utility-GoHome-by-MikhailU.elf": {},
     "utility-gps-returner-by-x27.elf": {},
@@ -38,16 +39,15 @@
     "utility-vietnamese-calendar-by-ngxson.elf": {},
     "watchface-abstract-by-ssp1971.elf": {},
     "watchface-keanu-by-MNVolkov.elf": {},
-    "watchface-mickey-by-usb.elf": {},
-    "utility-calendar-by-MNVolkov.elf": {}
-  },
-  "libbip": {
-    "BipOS_0.5.5_b5_not_latin_1.1.2.05_ENGLISH.bin": {},
-    "BipOS_0.5.5_b7_not_latin_1.1.5.36_MULTILANG.bin": {}
+    "watchface-mickey-by-usb.elf": {}
   },
   "font": {
     "BOLD_v4q_newsmiles.ft": {},
     "BOLD_V6.2_not_latin.ft": {},
     "Vietnamese_Emoji_v5.3.ft": {}
+  },
+  "libbip": {
+    "BipOS_0.5.5_b5_not_latin_1.1.2.05_ENGLISH.bin": {},
+    "BipOS_0.5.5_b7_not_latin_1.1.5.36_MULTILANG.bin": {}
   }
 }
