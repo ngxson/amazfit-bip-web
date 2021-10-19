@@ -11,7 +11,7 @@ function getSubArr(buf, start, end) {
 }
 
 export async function getResData(filename) {
-  const { data } = await axios.get(`/files/res/${filename}.res`, {
+  const { data } = await axios.get(`/files/res/${filename}`, {
     responseType: 'arraybuffer'
   });
   const buf = Buffer.from(data, 'binary');
