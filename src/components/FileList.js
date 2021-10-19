@@ -1,7 +1,7 @@
 import React from 'react';
 import files from '../data/files.json';
 
-function FileList({ type, title }) {
+function FileList({ type, title, children }) {
   return <>
     <div className="col-12">
       <h1>{title}</h1>
@@ -15,6 +15,8 @@ function FileList({ type, title }) {
           </li>
         ))}
       </ul>
+      <br/><br/>
+      {children}
     </div>
   </>;
 }

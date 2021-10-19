@@ -16,7 +16,7 @@ class ResBuilder extends React.Component {
   state = {
     loading: false,
     res: null,
-    apps: [],
+    apps: [ 'hook-alarm-manager-by-MNVolkov.elf' ],
   };
 
   addApp = (appName) => {

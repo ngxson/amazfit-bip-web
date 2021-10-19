@@ -4,6 +4,7 @@ import './App.css';
 import './bootstrap.min.css';
 import ResBuilder from './components/ResBuilder';
 import FileList from './components/FileList';
+import About from './components/About';
 
 class App extends React.Component {
   ResBuilder = () => {
@@ -15,8 +16,11 @@ class App extends React.Component {
   };
 
   Font = () => {
-    //return <FileList type="font" title="Font" />;
-    return null;
+    return <FileList type="font" title="Font" />;
+  };
+
+  About = () => {
+    return <About />;
   };
 
   render() {
@@ -44,7 +48,11 @@ class App extends React.Component {
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="https://forms.gle/AvfypGF54VowaNXNA" target="_blank" rel="noreferrer">Upload</a>
+                <a className="nav-link" href="#/about">About</a>
+              </li>
+
+              <li className="nav-item">
+                <a className="btn btn-outline-light" href="https://forms.gle/AvfypGF54VowaNXNA" target="_blank" rel="noreferrer">Upload</a>
               </li>
 
 
@@ -60,6 +68,7 @@ class App extends React.Component {
             <Route exact path="/" component={this.ResBuilder} />
             <Route path="/firmware" component={this.Firmware} />
             <Route path="/font" component={this.Font} />
+            <Route path="/about" component={this.About} />
           </HashRouter>
         </div>
       </div>

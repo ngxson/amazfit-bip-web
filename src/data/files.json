@@ -1,20 +1,53 @@
 {
   "fw": {
-    "BipOS_0.5.5_b5_not_latin_1.1.2.05_ENGLISH.fw": {}
+    "BipOS_0.5.5_b5_not_latin_1.1.2.05_ENGLISH.fw": {},
+    "BipOS_0.5.5_b7_not_latin_1.1.5.36_MULTILANG.fw": {}
   },
   "res": {
-    "BipOS_0.5.5_b5_not_latin_1.1.2.05_ENGLISH.res": {}
+    "BipOS_0.5.5_b5_not_latin_1.1.2.05_ENGLISH.res": {},
+    "BipOS_0.5.5_b7_not_latin_1.1.5.36_MULTILANG.res": {}
   },
   "app": {
-    "game-tetris-by-000edu.elf": {},
+    "game-2048-v0.3-by-zener79.elf": {},
+    "game-4letters-by-x27.elf": {},
+    "game-boxpop-v1.1-by-x27.elf": {},
+    "game-Breakout-by-PRO100KBAC.elf": {},
+    "game-fifteen-by-x27.elf": {},
+    "game-Magic8BallRU-by-erekoze.elf": {},
+    "game-Minesweeper-by-x27.elf": {},
+    "game-PingPong-by-PRO100KBAC.elf": {},
+    "game-Snake-by-PRO100KBAC.elf": {},
+    "game-SokobanBIP-v1.1-by-000edu.elf": {},
+    "game-TetrisBIP-v1.3-by-000edu.elf": {},
+    "game-TRex-by-Yuukari.elf": {},
+    "game-unblockme-by-x27.elf": {},
     "hook-alarm-manager-by-MNVolkov.elf": {},
-    "utility-btnotes-by-ngxson.elf": {},
+    "hook-animated-menu.elf": {},
+    "hook-simpleDND-by-MNVolkov.elf": {},
+    "utility-BipCounter-v2.4-by-erekoze.elf": {},
+    "utility-BTNotes-v3.0-by-ngxson.elf": {},
     "utility-calculator-by-MNVolkov.elf": {},
+    "utility-flashlight-by-MNVolkov.elf": {},
+    "utility-GoHome-by-MikhailU.elf": {},
     "utility-gps-returner-by-x27.elf": {},
     "utility-metronome-by-ngxson.elf": {},
-    "utility-vietnamese-calendar-by-ngxson.elf": {}
+    "utility-music-control-by-MNVolkov.elf": {},
+    "utility-NotesBIPAqua-v1.1-by-000edu.elf": {},
+    "utility-NotesBIPPurple-v1.1-by-000edu.elf": {},
+    "utility-SafeBoxBIP-v1.1-by-000edu.elf": {},
+    "utility-vietnamese-calendar-by-ngxson.elf": {},
+    "watchface-abstract-by-ssp1971.elf": {},
+    "watchface-keanu-by-MNVolkov.elf": {},
+    "watchface-mickey-by-usb.elf": {},
+    "utility-calendar-by-MNVolkov.elf": {}
   },
   "libbip": {
-    "BipOS_0.5.5_b5_not_latin_1.1.2.05_ENGLISH.bin": {}
+    "BipOS_0.5.5_b5_not_latin_1.1.2.05_ENGLISH.bin": {},
+    "BipOS_0.5.5_b7_not_latin_1.1.5.36_MULTILANG.bin": {}
+  },
+  "font": {
+    "BOLD_v4q_newsmiles.ft": {},
+    "BOLD_V6.2_not_latin.ft": {},
+    "Vietnamese_Emoji_v5.3.ft": {}
   }
 }
