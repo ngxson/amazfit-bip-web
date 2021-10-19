@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import { getResData } from './utils/res-extract';
+import { downloadArrayBuffer, getResBinary } from './utils/res-pack';
 
 function App() {
+  const test = async function () {
+    const resData = await getResData('not_latin_1.1.2.05_ENGLISH');
+    const newResBin = await getResBinary(resData);
+    downloadArrayBuffer(newResBin, 'not_latin_1.1.2.05_ENGLISH_packed.res');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={test}>TESTTTTT</button>
     </div>
   );
 }
