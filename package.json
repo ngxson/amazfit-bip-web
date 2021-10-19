@@ -14,10 +14,11 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "prestart": "npm run build:files-directory",
     "start": "react-scripts start",
+    "prebuild": "npm run build:files-directory",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build:files-directory": "node scripts/build-files-directory.js"
   },
   "eslintConfig": {
     "extends": [

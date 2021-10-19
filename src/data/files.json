@@ -1,0 +1,20 @@
+{
+  "fw": {
+    "BipOS_0.5.5_b5_not_latin_1.1.2.05_ENGLISH.fw": {}
+  },
+  "res": {
+    "not_latin_1.1.2.05_ENGLISH.res": {}
+  },
+  "app": {
+    "game-tetris-by-000edu.elf": {},
+    "hook-alarm-manager-by-MNVolkov.elf": {},
+    "utility-btnotes-by-ngxson.elf": {},
+    "utility-calculator-by-MNVolkov.elf": {},
+    "utility-gps-returner-by-x27.elf": {},
+    "utility-metronome-by-ngxson.elf": {},
+    "utility-vietnamese-calendar-by-ngxson.elf": {}
+  },
+  "libbip": {
+    "BipOS_0.5.5_b5_not_latin_1.1.2.05_ENGLISH.bin": {}
+  }
+}
