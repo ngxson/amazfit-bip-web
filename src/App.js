@@ -5,6 +5,7 @@ import './bootstrap.min.css';
 import ResBuilder from './components/ResBuilder';
 import FileList from './components/FileList';
 import About from './components/About';
+import FWCredits from './components/FWCredits';
 
 class App extends React.Component {
   ResBuilder = () => {
@@ -12,7 +13,9 @@ class App extends React.Component {
   };
 
   Firmware = () => {
-    return <FileList type="fw" title="Firmware" />;
+    return <FileList type="fw" title="Firmware">
+      <FWCredits />
+    </FileList>;
   };
 
   Font = () => {

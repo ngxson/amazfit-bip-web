@@ -28,6 +28,15 @@ const processDir = (relativePath, label) => {
   for (const file of files) {
     if (!content[label][file]) content[label][file] = {};
   }
+  content[label] = sortObjectKeys(content[label]);
 };
+
+const sortObjectKeys = (o) => Object.keys(o).sort().reduce(
+  (obj, key) => { 
+    obj[key] = o[key]; 
+    return obj;
+  }, 
+  {}
+);
 
 run();

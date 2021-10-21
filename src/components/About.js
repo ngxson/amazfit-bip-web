@@ -7,13 +7,12 @@ function FileList() {
       <p className="lead">Online .res builder for Amazfit Bip</p>
     </div>
     <div className="col-12">
-      Application made by <a href="https//ngxson.com" target="_blank">ngxson.com</a><br/>
+      Application made by <a href="https://ngxson.com" target="_blank">ngxson.com</a><br/>
       {/* eslint-disable-next-line */}
       Contact me via my email: <a href="javascript:location='mailto:\u0063\u006f\u006e\u0074\u0061\u0063\u0074\u0040\u006e\u0067\u0078\u0073\u006f\u006e\u002e\u0063\u006f\u006d';void 0">{'\u0063\u006f\u006e\u0074\u0061\u0063\u0074\u0040\u006e\u0067\u0078\u0073\u006f\u006e\u002e\u0063\u006f\u006d'}</a><br/>
       <br/>
       Thanks to:<br/>
       - <a href="https://github.com/MNVolkov">MNVolkov</a> for his work on BipOS<br/>
-      - <a href="https://myamazfit.ru/members/mixann.49882/">Mixann</a> for 1.1.5.36 FW<br/>
       <br/>
       <br/>
       <br/>
