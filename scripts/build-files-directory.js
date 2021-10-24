@@ -21,12 +21,22 @@ function run() {
 const content = JSON.parse(
   fs.readFileSync(path.join(__dirname, OUTPUT_DIR)).toString()
 );
-const getFileList = (relativePath) => fs.readdirSync(path.join(__dirname, relativePath));
+const getFileList = (relativePath) => {
+  const dir = path.join(__dirname, relativePath);
+  return fs.readdirSync(dir).map(filename => ({
+    filename,
+    size: fs.statSync(path.join(dir, filename)).size,
+  }));
+};
+
 const processDir = (relativePath, label) => {
   if (!content[label]) content[label] = {};
   const files = getFileList(relativePath);
-  for (const file of files) {
-    if (!content[label][file]) content[label][file] = {};
+  for (const {filename, size} of files) {
+    content[label][filename] = {
+      ...content[label][filename],
+      size,
+    };
   }
   content[label] = sortObjectKeys(content[label]);
 };

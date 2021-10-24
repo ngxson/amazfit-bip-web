@@ -3,6 +3,7 @@ import React from 'react';
 import files from '../data/files.json';
 import { getResData } from '../utils/res-extract';
 import { downloadArrayBuffer, getResBinary } from '../utils/res-pack';
+import { ResSize, getELFSize } from '../utils/res-size-calc';
 
 async function getFile(url) {
   const { data } = await axios.get(url, {
@@ -86,7 +87,7 @@ class ResBuilder extends React.Component {
   };
 
   _renderAppSelect() {
-    const { apps, loading } = this.state;
+    const { res, apps, loading } = this.state;
     return <>
       <div className="col-sm-12 col-md-6 col-lg-6">
         <br/><br/>
@@ -95,12 +96,14 @@ class ResBuilder extends React.Component {
           <button className="btn btn-primary" onClick={() => this.moveApp('up', i)}>▲</button>&nbsp;
           <button className="btn btn-primary" onClick={() => this.moveApp('down', i)}>▼</button>&nbsp;
           <button className="btn btn-danger" onClick={() => this.delApp(i)}>Delete</button><br/>
-          {'  ' + appName}
+          {'  ' + appName} ({getELFSize(appName)})
         </div>)}
         + LIBBIP
-
+        <br/><br/>
+        <ResSize apps={apps} res={res} />
         <br/><br/>
         <button className="btn btn-primary" onClick={this.buildResFile} disabled={loading}>{loading ? 'Exporting...' : 'Export .res file'}</button>
+        <br/><br/><br/><br/>
       </div>
       <div className="col-sm-12 col-md-6 col-lg-6">
         <br/><br/>
@@ -109,7 +112,7 @@ class ResBuilder extends React.Component {
         .filter(a => !apps.includes(a))
         .map(appName => <div className="nui-app-item" key={appName}>
           <button className="btn btn-primary" onClick={() => this.addApp(appName)}>Add</button>
-          {'  ' + appName}
+          {'  ' + appName} ({getELFSize(appName)})
         </div>)}
       </div>
     </>

@@ -1,7 +1,5 @@
 import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
-import './App.css';
-import './bootstrap.min.css';
 import ResBuilder from './components/ResBuilder';
 import FileList from './components/FileList';
 import About from './components/About';
