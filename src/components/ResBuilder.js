@@ -3,7 +3,7 @@ import React from 'react';
 import files from '../data/files.json';
 import { getResData } from '../utils/res-extract';
 import { downloadArrayBuffer, getResBinary } from '../utils/res-pack';
-import { ResSize, getELFSize } from '../utils/res-size-calc';
+import { ResSize, getELFSize, getELFMetadata } from '../utils/res-size-calc';
 
 async function getFile(url) {
   const { data } = await axios.get(url, {
@@ -86,8 +86,26 @@ class ResBuilder extends React.Component {
     this.setState({ loading: false });
   };
 
+  _renderAppLabel(appName) {
+    const metaData = getELFMetadata(appName);
+    const nameParts = appName.split('-');
+    const prefix = nameParts.shift();
+    const name = nameParts.join('-');
+    return <>
+      {'  '}
+      <span className={`app-label ${prefix}`}>{prefix}</span>
+      {'  '}
+      {metaData.forum
+        ? <a className='forum' href={metaData.forum} target="_blank" rel="noreferrer">{name}</a>
+        : <>{name}</>
+      }
+      {'  '} ({getELFSize(appName)})
+    </>
+  }
+
   _renderAppSelect() {
     const { res, apps, loading } = this.state;
+
     return <>
       <div className="col-sm-12 col-md-6 col-lg-6">
         <br/><br/>
@@ -95,8 +113,8 @@ class ResBuilder extends React.Component {
         {apps.map((appName, i) => <div className="nui-app-item" key={appName}>
           <button className="btn btn-primary" onClick={() => this.moveApp('up', i)}>▲</button>&nbsp;
           <button className="btn btn-primary" onClick={() => this.moveApp('down', i)}>▼</button>&nbsp;
-          <button className="btn btn-danger" onClick={() => this.delApp(i)}>Delete</button><br/>
-          {'  ' + appName} ({getELFSize(appName)})
+          <button className="btn btn-danger" onClick={() => this.delApp(i)}>Delete</button>
+          {this._renderAppLabel(appName)}
         </div>)}
         + LIBBIP
         <br/><br/>
@@ -112,8 +130,9 @@ class ResBuilder extends React.Component {
         .filter(a => !apps.includes(a))
         .map(appName => <div className="nui-app-item" key={appName}>
           <button className="btn btn-primary" onClick={() => this.addApp(appName)}>Add</button>
-          {'  ' + appName} ({getELFSize(appName)})
+          {this._renderAppLabel(appName)}
         </div>)}
+        <br/><br/>
       </div>
     </>
   }

@@ -19,3 +19,20 @@ code {
   padding: 0.2em;
   margin: 0.2em;
 }
+
+a.forum::after {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+  margin: 0 3px 0 5px;
+}
+
+.app-label {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  border-radius: 100px;
+  color: white;
+}
+
+.app-label.game { background-color: #e83e8c; }
+.app-label.utility { background-color: #6cc3d5; }
+.app-label.hook { background-color: #6f42c1; }
+.app-label.watchface { background-color: #cca550; }

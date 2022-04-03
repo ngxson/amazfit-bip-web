@@ -2,6 +2,10 @@ import files from '../data/files.json';
 
 const byteToKB = (i) => Math.round(i / 1024) + 'KB';
 
+export function getELFMetadata(filename) {
+  return files.app[filename] || {};
+}
+
 export function getELFSize(filename) {
   return byteToKB(files.app[filename].size);
 }
