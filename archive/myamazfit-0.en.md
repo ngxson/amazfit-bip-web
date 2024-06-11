@@ -10,6 +10,8 @@ The "Calculator" app allows you to perform basic arithmetic operations + - * /. 
 ## 2. Calendar
 The "Calendar" app displays the calendar for the current month and any selected month of any year. The calendar works from the year 1600 to 3000. The day of the week calculation algorithm works for any date in the Gregorian calendar. When launched, the current month is displayed, and the current day is highlighted. The names of the months at the top of the screen are fully spelled out, unlike previous versions. You can select another month and year: swipe up/down to switch the month, and use the arrows to switch the year. Tapping the name of the month returns to the current date. You can choose from several color schemes, with the choice saved in non-volatile memory.
 
+Source code: https://github.com/MNVolkov/Calend
+
 ## 3. Alarm Editor
 The "Alarm Editor" app is available from the alarm settings menu. You can change the time of a selected alarm, set repetition by weekdays, or choose a one-time mode. Repetition is selected on a screen accessible by swiping left. To select the one-time mode, uncheck all the boxes. For convenience, you can set the current time by tapping the alarm icon on the time setting screen. Synchronization with MiFit only affects the on/off status (as before), without changing the time in MiFit. However, you can still set an alarm in MiFit, and it will be loaded into the watch. Alarm data on the watch is always up-to-date. Tapping the "alarm" icon sets the current time. Currently, you can only edit existing alarms, not add or delete them.
 
@@ -17,6 +19,8 @@ For BipOS 0.5.2
 
 ## 4. Flashlight
 The simple "Flashlight" app is designed to illuminate things using the screen's backlight LEDs. When launched, the flashlight immediately turns on the backlight to full and fills the screen with white light. You can turn the flashlight on and off by tapping the screen. Exit the app as usual with a right swipe or the side button.
+
+Source code: https://github.com/MNVolkov/Flashlight
 
 ---
 

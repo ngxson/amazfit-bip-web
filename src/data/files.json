@@ -23,139 +23,173 @@
   },
   "app": {
     "game-2048-v0.3-by-zener79.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-43071",
+      "forum": "https://github.com/giovantenne/2048-bipos",
+      "desc": "2048 Game",
       "size": 11092
     },
     "game-4letters-by-x27.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-50321",
+      "forum": "",
+      "desc": "4 Letters Game",
       "size": 37732
     },
     "game-Breakout-by-PRO100KBAC.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-42553",
+      "forum": "",
+      "desc": "Breakout Game",
       "size": 29000
     },
     "game-Magic8BallRU-by-erekoze.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-48068",
+      "forum": "",
+      "desc": "Magic 8 Balls Game (Russian)",
       "size": 26652
     },
     "game-Minesweeper-by-x27.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-50344",
+      "forum": "",
+      "desc": "Minesweeper Game",
       "size": 8388
     },
     "game-PingPong-by-PRO100KBAC.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-42552",
+      "forum": "",
+      "desc": "Ping Pong Game",
       "size": 28180
     },
     "game-Snake-by-PRO100KBAC.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-42631",
+      "forum": "",
+      "desc": "Snake Game",
       "size": 37472
     },
     "game-SokobanBIP-v1.1-by-000edu.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-45951",
+      "forum": "",
+      "desc": "Sokoban Game",
       "size": 87220
     },
     "game-TRex-by-Yuukari.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-52585",
+      "forum": "https://github.com/yuukari/TRex",
+      "desc": "T-Rex Game (a.k.a Chrome T-Rex)",
       "size": 28388
     },
     "game-TetrisBIP-v1.3-by-000edu.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-41424",
+      "forum": "",
+      "desc": "Tetris Game",
       "size": 17616
     },
     "game-boxpop-v1.1-by-x27.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-49386",
+      "forum": "",
+      "desc": "Box Pop Game",
       "size": 12620
     },
     "game-fifteen-by-x27.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-50354",
+      "forum": "",
+      "desc": "Fifteen Game",
       "size": 7512
     },
     "game-flappybird-v0.2.7-by-PRO100KBAC.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/page-26#post-42629",
+      "forum": "",
+      "desc": "Flappy Bird Game",
       "size": 31060
     },
     "game-unblockme-by-x27.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-50434",
+      "forum": "",
+      "desc": "Unblock Me Game",
       "size": 39612
     },
     "hook-alarm-manager-by-MNVolkov.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/",
+      "forum": "https://github.com/ngxson/hobby-amazfit-bip-web/blob/master/archive/myamazfit-0.en.md",
+      "desc": "Alarm Manager",
       "size": 9616
     },
     "hook-animated-menu.elf": {
       "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/",
+      "desc": "Animated Menu Items",
       "size": 177316
     },
     "hook-simpleDND-by-MNVolkov.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/",
+      "forum": "https://github.com/MNVolkov/simpleDND",
+      "desc": "Add features to DND (swipe-down) screen",
       "size": 16664
     },
     "utility-BTNotes-v3.0-by-ngxson.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-54498",
+      "forum": "https://github.com/ngxson/hobby_amazfit_bip_bt_notes",
+      "desc": "This app allows you to save notification as note. Notes can be preserved even after you clear all notifications. ",
       "size": 16564
     },
     "utility-BipCounter-v2.4-by-erekoze.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-50635",
+      "forum": "",
+      "desc": "Simple counter app (tap to count up)",
       "size": 14260
     },
     "utility-GoHome-by-MikhailU.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/",
+      "forum": "",
+      "desc": "Go Home - simplified GPS Returner analog using the compass",
       "size": 28420
     },
     "utility-NotesBIPAqua-v1.1-by-000edu.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-47683",
+      "forum": "",
+      "desc": "Simple note editor app (Aqua color theme)",
       "size": 46932
     },
     "utility-NotesBIPPurple-v1.1-by-000edu.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-47683",
+      "forum": "",
+      "desc": "Simple note editor app (Purple color theme)",
       "size": 46928
     },
     "utility-SafeBoxBIP-v1.1-by-000edu.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-47683",
+      "forum": "",
+      "desc": "Simple app for storing passwords, PIN codes",
       "size": 47060
     },
     "utility-calculator-by-MNVolkov.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/",
+      "forum": "https://github.com/ngxson/hobby-amazfit-bip-web/blob/master/archive/myamazfit-0.en.md",
+      "desc": "The Calculator app allows you to perform basic arithmetic operations",
       "size": 10156
     },
     "utility-calendar-by-MNVolkov.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/",
+      "forum": "https://github.com/ngxson/hobby-amazfit-bip-web/blob/master/archive/myamazfit-0.en.md",
+      "desc": "The Calendar app displays the calendar for the current month and any selected month of any year.",
       "size": 10036
     },
     "utility-flashlight-by-MNVolkov.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/",
+      "forum": "https://github.com/ngxson/hobby-amazfit-bip-web/blob/master/archive/myamazfit-0.en.md",
+      "desc": "The simple Flashlight app is designed to illuminate things using the screen's backlight LEDs",
       "size": 5884
     },
     "utility-gps-returner-by-x27.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-50878",
+      "forum": "",
+      "desc": "Return to a defined point via GPS",
       "size": 28712
     },
     "utility-metronome-by-ngxson.elf": {
       "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-53476",
+      "desc": "Simple Metronome app, useful for meditation or for playing musical instruments",
       "size": 6808
     },
     "utility-music-control-by-MNVolkov.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/",
+      "forum": "https://github.com/MNVolkov/Music_Control",
+      "desc": "Remote control your favorite music player on your phone. Phone host app can be used are: Amazfit MOD, GadgetBridge or LikeApp",
       "size": 34388
     },
     "utility-navigator-Marlen-Maksumov.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/page-70#post-49439",
+      "forum": "",
+      "desc": "(no description)",
       "size": 29812
     },
     "utility-vietnamese-calendar-by-ngxson.elf": {
       "forum": "https://www.facebook.com/groups/275310382953160/posts/1049164075567783/",
+      "desc": "Vietnamese Calendar (Lunar Calendar)",
       "size": 10004
     },
     "watchface-abstract-by-ssp1971.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/page-70#post-49439",
+      "forum": "",
+      "desc": "(no description)",
       "size": 58776
     },
     "watchface-keanu-by-MNVolkov.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-39798",
+      "forum": "",
+      "desc": "(no description)",
       "size": 175176
     },
     "watchface-mickey-by-usb.elf": {
-      "forum": "https://myamazfit.ru/threads/bip-prilozhenija-dlja-bipos-elf.1174/post-41575",
+      "forum": "",
+      "desc": "(no description)",
       "size": 175148
     }
   },
