@@ -32,6 +32,7 @@ a.forum::after {
   color: white;
 }
 
+.app-label.system { background-color: #909090; }
 .app-label.game { background-color: #e83e8c; }
 .app-label.utility { background-color: #6cc3d5; }
 .app-label.hook { background-color: #6f42c1; }

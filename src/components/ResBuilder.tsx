@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import files from '../data/files.json';
 import { getResData } from '../utils/res-extract';
 import { downloadArrayBuffer, getResBinary } from '../utils/res-pack';
-import { getELFSize, getELFMetadata } from '../utils/res-size-calc';
+import { getELFSize, getELFMetadata, getLibBipSize, getResBaseSize } from '../utils/res-size-calc';
 import { AppName, LibbipName, ResName, ResPayload } from '../utils/res-type';
 
 async function getFile(url: string) {
@@ -27,6 +27,11 @@ export default function ResBuilder() {
   const [loading, setLoading] = useState<boolean>(false);
   const [res, setRes] = useState<ResName | ''>('');
   const [apps, setApps] = useState<AppName[]>(DEFAULT_APPS);
+
+  const libbip = useMemo(() => {
+    const ret: LibbipName | '' = res.replace('.res', '.bin') as any;
+    return ret;
+  }, [res]);
 
   // load saved data
   useEffect(() => {
@@ -112,13 +117,14 @@ export default function ResBuilder() {
       <div className="col-sm-12 col-md-6 col-lg-6">
         <br/><br/>
         Selected apps:<br/>
-        {apps.map((appName, i) => <div className="nui-app-item" key={appName}>
-          <button className="btn btn-primary" onClick={() => moveApp('up', i)}>▲</button>&nbsp;
-          <button className="btn btn-primary" onClick={() => moveApp('down', i)}>▼</button>&nbsp;
-          <button className="btn btn-danger" onClick={() => delApp(i)}>Delete</button>
-          <AppLabel appName={appName} />
-        </div>)}
-        + LIBBIP
+        <SelectedApp i={-1} res={res} />
+        <SelectedApp i={-1} libbip={libbip} />
+        {apps.map((appName, i) => <SelectedApp
+          appName={appName}
+          i={i}
+          moveApp={moveApp}
+          delApp={delApp}
+        />)}
         <br/><br/>
         <ResSize apps={apps} res={res} />
         <br/><br/>
@@ -142,6 +148,36 @@ export default function ResBuilder() {
       </div>
     </>}
   </>;
+}
+
+function SelectedApp({ moveApp, delApp, appName, i, libbip = '', res = '' }: {
+  appName?: AppName,
+  moveApp?(direction: 'up' | 'down', i: number): void,
+  delApp?(i: number): void,
+  libbip?: LibbipName | '',
+  res?: ResName | '',
+  i: number,
+}) {
+  return (
+    <div className="nui-app-item" key={appName}>
+      <button className="btn btn-primary" onClick={() => {
+        moveApp?.('up', i);
+      }} disabled={!appName}>▲</button>&nbsp;
+      <button className="btn btn-primary" onClick={() => {
+        moveApp?.('down', i);
+      }} disabled={!appName}>▼</button>&nbsp;
+      <button className="btn btn-danger" onClick={() => delApp?.(i)} disabled={!appName}>Delete</button>
+      {appName && <AppLabel appName={appName} />}
+      {res !== '' && <>
+        &nbsp;<span className="app-label system">system</span>
+        &nbsp;system assets ({getResBaseSize(res)})
+      </>}
+      {libbip !== '' && <>
+        &nbsp;<span className="app-label system">system</span>
+        &nbsp;system library (libbip) ({getLibBipSize(libbip)})
+      </>}
+    </div>
+  );
 }
 
 function AppLabel({ appName }: {
