@@ -65,20 +65,20 @@ export default function ResBuilder() {
   };
 
   const moveApp = (direction: "up" | "down", i: number) => {
-    setApps((apps) => {
-      const newApps = [...apps];
+    setApps((oldApps) => {
+      const apps = [...oldApps];
       if (direction === "up") {
-        if (i === 0) return newApps;
+        if (i === 0) return apps;
         const tmp = apps[i];
         apps[i] = apps[i - 1];
         apps[i - 1] = tmp;
       } else if (direction === "down") {
-        if (i === apps.length - 1) return newApps;
+        if (i === apps.length - 1) return apps;
         const tmp = apps[i];
         apps[i] = apps[i + 1];
         apps[i + 1] = tmp;
       }
-      return newApps;
+      return apps;
     });
   };
 
