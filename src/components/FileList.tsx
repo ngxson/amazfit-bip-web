@@ -1,7 +1,11 @@
-import React from 'react';
 import files from '../data/files.json';
+import { ResDataType } from '../utils/res-type';
 
-function FileList({ type, title, children }) {
+function FileList({ type, title, children }: {
+  type: ResDataType,
+  title: string,
+  children?: any,
+}) {
   return <>
     <div className="col-12">
       <h1>{title}</h1>

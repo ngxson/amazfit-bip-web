@@ -1,5 +1,3 @@
-import React from 'react';
-
 function FileList() {
   return <>
     <div className="col-12">

@@ -52,8 +52,8 @@ class App extends React.Component {
                 <a className="nav-link" href="#/about">About</a>
               </li>
 
-              <li className="nav-item">
-                <a className="btn btn-outline-light" href="https://forms.gle/AvfypGF54VowaNXNA" target="_blank" rel="noreferrer">Upload</a>
+              <li className="nav-item" style={{ fontWeight: 'bold' }}>
+                <a className="nav-link" href="https://forms.gle/AvfypGF54VowaNXNA" target="_blank" rel="noreferrer">👋 Upload</a>
               </li>
 
 
