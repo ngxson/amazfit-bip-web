@@ -1,19 +1,19 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 .nui-app-item {
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 5px;
   padding: 0.2em;
@@ -32,8 +32,18 @@ a.forum::after {
   color: white;
 }
 
-.app-label.system { background-color: #909090; }
-.app-label.game { background-color: #e83e8c; }
-.app-label.utility { background-color: #6cc3d5; }
-.app-label.hook { background-color: #6f42c1; }
-.app-label.watchface { background-color: #cca550; }
+.app-label.system {
+  background-color: #909090;
+}
+.app-label.game {
+  background-color: #e83e8c;
+}
+.app-label.utility {
+  background-color: #6cc3d5;
+}
+.app-label.hook {
+  background-color: #6f42c1;
+}
+.app-label.watchface {
+  background-color: #cca550;
+}

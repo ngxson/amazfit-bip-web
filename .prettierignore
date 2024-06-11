@@ -1,0 +1,10 @@
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+
+/dist
+/public
+*.json
+bootstrap.min.css
+*.md

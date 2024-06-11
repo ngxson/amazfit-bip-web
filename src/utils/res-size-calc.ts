@@ -1,5 +1,5 @@
-import files from '../data/files.json';
-import { AppName, LibbipName, ResName } from './res-type';
+import files from "../data/files.json";
+import { AppName, LibbipName, ResName } from "./res-type";
 
 const byteToKB = (i: number) => `${Math.round(i / 1024)}KB`;
 

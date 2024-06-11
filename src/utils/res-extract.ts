@@ -1,7 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
 function getIntAt(buf: Uint8Array, addr: number) {
-  return buf[addr] + (buf[addr+1] << 8) + (buf[addr+2] << 16) + (buf[addr+3] << 24);
+  return (
+    buf[addr] +
+    (buf[addr + 1] << 8) +
+    (buf[addr + 2] << 16) +
+    (buf[addr + 3] << 24)
+  );
 }
 
 function getSubArr(buf: Uint8Array, start: number, end: number) {
@@ -12,7 +17,7 @@ function getSubArr(buf: Uint8Array, start: number, end: number) {
 
 export async function getResData(filename: string) {
   const { data } = await axios.get(`/files/res/${filename}`, {
-    responseType: 'arraybuffer'
+    responseType: "arraybuffer",
   });
   const buf = new Uint8Array(data as ArrayBuffer);
 
@@ -33,9 +38,7 @@ export async function getResData(filename: string) {
 
   for (let i = 0; i < resCount; i++) {
     const start = offset + getResAddr(i);
-    const end = (i === resCount - 1)
-      ? buf.length
-      : offset + getResAddr(i + 1);
+    const end = i === resCount - 1 ? buf.length : offset + getResAddr(i + 1);
     resTable.push(getSubArr(buf, start, end));
   }
 

@@ -1,16 +1,18 @@
-import { saveAs } from 'file-saver';
-import { ResBinaryPayload } from './res-type';
+import { saveAs } from "file-saver";
+import { ResBinaryPayload } from "./res-type";
 
 function getIntLE(i: number): Uint8Array {
   return Uint8Array.from([
-    i & 0xFF,
-    (i >> 8) & 0xFF,
-    (i >> 16) & 0xFF,
-    (i >> 24) & 0xFF,
+    i & 0xff,
+    (i >> 8) & 0xff,
+    (i >> 16) & 0xff,
+    (i >> 24) & 0xff,
   ]);
 }
 
-export async function getResBinary(resData: ResBinaryPayload): Promise<Uint8Array> {
+export async function getResBinary(
+  resData: ResBinaryPayload,
+): Promise<Uint8Array> {
   let bin: Uint8Array = new Uint8Array();
   const appendToBin = (buf: Uint8Array) => {
     const newBin = new Uint8Array(bin.byteLength + buf.byteLength);
@@ -40,8 +42,5 @@ export async function getResBinary(resData: ResBinaryPayload): Promise<Uint8Arra
 }
 
 export async function downloadArrayBuffer(buf: Uint8Array, filename: string) {
-  saveAs(
-    new Blob([buf], { type: 'application/octet-stream' }),
-    filename
-  );
+  saveAs(new Blob([buf], { type: "application/octet-stream" }), filename);
 }
