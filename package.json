@@ -1,13 +1,15 @@
 {
-  "name": "hobby-amazfit-bip-web-2",
+  "name": "hobby-amazfit-bip-web",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "npm run build:files-directory",
     "dev": "vite",
+    "prebuild": "npm run build:files-directory",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "build:files-directory": "node scripts/build-files-directory.cjs"
   },
   "dependencies": {
     "axios": "^1.7.2",
