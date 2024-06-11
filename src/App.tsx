@@ -1,9 +1,9 @@
-import React from "react";
-import { HashRouter, Route } from "react-router-dom";
-import ResBuilder from "./components/ResBuilder";
-import FileList from "./components/FileList";
-import About from "./components/About";
-import FWCredits from "./components/FWCredits";
+import React from 'react';
+import { HashRouter, Route } from 'react-router-dom';
+import ResBuilder from './components/ResBuilder';
+import FileList from './components/FileList';
+import About from './components/About';
+import FWCredits from './components/FWCredits';
 
 class App extends React.Component {
   ResBuilder = () => {
@@ -71,7 +71,7 @@ class App extends React.Component {
                   </a>
                 </li>
 
-                <li className="nav-item" style={{ fontWeight: "bold" }}>
+                <li className="nav-item" style={{ fontWeight: 'bold' }}>
                   <a
                     className="nav-link"
                     href="https://forms.gle/AvfypGF54VowaNXNA"

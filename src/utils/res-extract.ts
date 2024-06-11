@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 function getIntAt(buf: Uint8Array, addr: number) {
   return (
@@ -17,7 +17,7 @@ function getSubArr(buf: Uint8Array, start: number, end: number) {
 
 export async function getResData(filename: string) {
   const { data } = await axios.get(`/files/res/${filename}`, {
-    responseType: "arraybuffer",
+    responseType: 'arraybuffer',
   });
   const buf = new Uint8Array(data as ArrayBuffer);
 

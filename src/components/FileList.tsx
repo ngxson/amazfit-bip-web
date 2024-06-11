@@ -1,5 +1,5 @@
-import files from "../data/files.json";
-import { ResDataType } from "../utils/res-type";
+import files from '../data/files.json';
+import { ResDataType } from '../utils/res-type';
 
 function FileList({
   type,

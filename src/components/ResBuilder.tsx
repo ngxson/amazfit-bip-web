@@ -1,53 +1,53 @@
-import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
-import files from "../data/files.json";
-import { getResData } from "../utils/res-extract";
-import { downloadArrayBuffer, getResBinary } from "../utils/res-pack";
+import axios from 'axios';
+import { useEffect, useMemo, useState } from 'react';
+import files from '../data/files.json';
+import { getResData } from '../utils/res-extract';
+import { downloadArrayBuffer, getResBinary } from '../utils/res-pack';
 import {
   getELFSize,
   getELFMetadata,
   getLibBipSize,
   getResBaseSize,
-} from "../utils/res-size-calc";
-import { AppName, LibbipName, ResName, ResPayload } from "../utils/res-type";
+} from '../utils/res-size-calc';
+import { AppName, LibbipName, ResName, ResPayload } from '../utils/res-type';
 
 async function getFile(url: string) {
   const { data } = await axios.get(url, {
-    responseType: "arraybuffer",
+    responseType: 'arraybuffer',
   });
   const buf = new Uint8Array(data as ArrayBuffer);
   return buf;
 }
 
-const STORAGE_KEY_APPS = "ngxson_apps";
-const STORAGE_KEY_RES = "ngxson_res";
+const STORAGE_KEY_APPS = 'ngxson_apps';
+const STORAGE_KEY_RES = 'ngxson_res';
 const DEFAULT_APPS: AppName[] = [
-  "hook-alarm-manager-by-MNVolkov.elf",
-  "utility-calendar-by-MNVolkov.elf",
-  "utility-calculator-by-MNVolkov.elf",
-  "utility-flashlight-by-MNVolkov.elf",
+  'hook-alarm-manager-by-MNVolkov.elf',
+  'utility-calendar-by-MNVolkov.elf',
+  'utility-calculator-by-MNVolkov.elf',
+  'utility-flashlight-by-MNVolkov.elf',
 ];
 
 export default function ResBuilder() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [res, setRes] = useState<ResName | "">("");
+  const [res, setRes] = useState<ResName | ''>('');
   const [apps, setApps] = useState<AppName[]>(DEFAULT_APPS);
 
   const libbip = useMemo(() => {
-    const ret: LibbipName | "" = res.replace(".res", ".bin") as any;
+    const ret: LibbipName | '' = res.replace('.res', '.bin') as any;
     return ret;
   }, [res]);
 
   // load saved data
   useEffect(() => {
     const savedApps = JSON.parse(
-      localStorage.getItem(STORAGE_KEY_APPS) || "null",
+      localStorage.getItem(STORAGE_KEY_APPS) || 'null'
     );
     if (savedApps) {
       setApps(savedApps.filter((a: string) => !!(files.app as any)[a]));
     }
     const savedRes = JSON.parse(
-      localStorage.getItem(STORAGE_KEY_RES) || "null",
+      localStorage.getItem(STORAGE_KEY_RES) || 'null'
     );
     if (savedRes) {
       setRes(savedRes);
@@ -64,15 +64,15 @@ export default function ResBuilder() {
     setApps((apps) => [...apps, appName]);
   };
 
-  const moveApp = (direction: "up" | "down", i: number) => {
+  const moveApp = (direction: 'up' | 'down', i: number) => {
     setApps((oldApps) => {
       const apps = [...oldApps];
-      if (direction === "up") {
+      if (direction === 'up') {
         if (i === 0) return apps;
         const tmp = apps[i];
         apps[i] = apps[i - 1];
         apps[i - 1] = tmp;
-      } else if (direction === "down") {
+      } else if (direction === 'down') {
         if (i === apps.length - 1) return apps;
         const tmp = apps[i];
         apps[i] = apps[i + 1];
@@ -90,12 +90,12 @@ export default function ResBuilder() {
     setLoading(true);
     const resData = await getResData(res);
     const appsData = await Promise.all([
-      getFile(`/files/libbip/${res.replace(".res", ".bin")}`),
+      getFile(`/files/libbip/${res.replace('.res', '.bin')}`),
       ...apps.map((appName) => getFile(`/files/app/${appName}`)),
     ]);
     appsData.forEach((d) => resData.resTable.push(d));
     const newResBin = await getResBinary(resData);
-    const newResName = "RES_" + res.replace(".res", `_${Date.now()}.res`);
+    const newResName = 'RES_' + res.replace('.res', `_${Date.now()}.res`);
     downloadArrayBuffer(newResBin, newResName);
     setLoading(false);
   };
@@ -105,7 +105,7 @@ export default function ResBuilder() {
       <div className="col-12">
         <h1>Res Builder</h1>
         <p className="lead">
-          {res ? "Select apps to build a .res file" : "Select your FW version"}
+          {res ? 'Select apps to build a .res file' : 'Select your FW version'}
         </p>
       </div>
 
@@ -116,7 +116,7 @@ export default function ResBuilder() {
           value={res}
           className="form-select"
         >
-          <option value={""}>...</option>
+          <option value={''}>...</option>
           {Object.keys(files.res).map((res) => (
             <option key={res} value={res}>
               {res}
@@ -126,7 +126,7 @@ export default function ResBuilder() {
       </div>
       <div className="hidden-sm col-md-6 col-lg-6"></div>
 
-      {res !== "" && (
+      {res !== '' && (
         <>
           {/* App selector */}
           <div className="col-sm-12 col-md-6 col-lg-6">
@@ -154,7 +154,7 @@ export default function ResBuilder() {
               onClick={buildResFile}
               disabled={loading}
             >
-              {loading ? "Exporting..." : "Export .res file"}
+              {loading ? 'Exporting...' : 'Export .res file'}
             </button>
             <br />
             <br />
@@ -194,14 +194,14 @@ function SelectedApp({
   delApp,
   appName,
   i,
-  libbip = "",
-  res = "",
+  libbip = '',
+  res = '',
 }: {
   appName?: AppName;
-  moveApp?(direction: "up" | "down", i: number): void;
+  moveApp?(direction: 'up' | 'down', i: number): void;
   delApp?(i: number): void;
-  libbip?: LibbipName | "";
-  res?: ResName | "";
+  libbip?: LibbipName | '';
+  res?: ResName | '';
   i: number;
 }) {
   return (
@@ -209,7 +209,7 @@ function SelectedApp({
       <button
         className="btn btn-primary"
         onClick={() => {
-          moveApp?.("up", i);
+          moveApp?.('up', i);
         }}
         disabled={!appName}
       >
@@ -219,7 +219,7 @@ function SelectedApp({
       <button
         className="btn btn-primary"
         onClick={() => {
-          moveApp?.("down", i);
+          moveApp?.('down', i);
         }}
         disabled={!appName}
       >
@@ -234,13 +234,13 @@ function SelectedApp({
         Delete
       </button>
       {appName && <AppLabel appName={appName} />}
-      {res !== "" && (
+      {res !== '' && (
         <>
           &nbsp;<span className="app-label system">system</span>
           &nbsp;system assets ({getResBaseSize(res)})
         </>
       )}
-      {libbip !== "" && (
+      {libbip !== '' && (
         <>
           &nbsp;<span className="app-label system">system</span>
           &nbsp;system library (libbip) ({getLibBipSize(libbip)})
@@ -252,14 +252,14 @@ function SelectedApp({
 
 function AppLabel({ appName }: { appName: AppName }) {
   const metaData = getELFMetadata(appName);
-  const nameParts = appName.split("-");
+  const nameParts = appName.split('-');
   const prefix = nameParts.shift();
-  const name = nameParts.join("-");
+  const name = nameParts.join('-');
   return (
     <>
-      {"  "}
+      {'  '}
       <span className={`app-label ${prefix}`}>{prefix}</span>
-      {"  "}
+      {'  '}
       {metaData.forum ? (
         <a
           className="forum"
@@ -272,7 +272,7 @@ function AppLabel({ appName }: { appName: AppName }) {
       ) : (
         <>{name}</>
       )}
-      {"  "} ({getELFSize(appName)})
+      {'  '} ({getELFSize(appName)})
     </>
   );
 }
@@ -281,7 +281,7 @@ const byteToKB = (i: number) => `${Math.round(i / 1024)}KB`;
 export function ResSize({ res, apps }: ResPayload) {
   const THRESHOLD_WARN = 750 * 1024;
   const MAX_RES_SIZE = 800 * 1024;
-  const libbip = res.replace(".res", ".bin") as any as LibbipName;
+  const libbip = res.replace('.res', '.bin') as any as LibbipName;
   let sumSize = files.res[res].size + files.libbip[libbip].size;
   for (const app of apps) {
     sumSize += files.app[app].size;
@@ -292,11 +292,11 @@ export function ResSize({ res, apps }: ResPayload) {
     <>
       File size:
       <br />
-      <div className="progress" style={{ height: "2em" }}>
+      <div className="progress" style={{ height: '2em' }}>
         <div
           className="progress-bar"
           role="progressbar"
-          style={{ width: precent + "%", fontSize: "1.3em" }}
+          style={{ width: precent + '%', fontSize: '1.3em' }}
         >
           {byteToKB(sumSize)} / {byteToKB(MAX_RES_SIZE)}
         </div>

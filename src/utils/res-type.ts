@@ -1,4 +1,4 @@
-import files from "../data/files.json";
+import files from '../data/files.json';
 
 export type ResDataType = keyof typeof files;
 export type FWName = keyof typeof files.fw;
