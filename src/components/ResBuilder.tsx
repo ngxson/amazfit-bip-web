@@ -1,15 +1,18 @@
 import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 import files from '../data/files.json';
-import { getResData } from '../utils/res-extract';
-import { downloadArrayBuffer, getResBinary } from '../utils/res-pack';
 import {
   getELFSize,
   getELFMetadata,
   getLibBipSize,
   getResBaseSize,
-} from '../utils/res-size-calc';
-import { AppName, LibbipName, ResName, ResPayload } from '../utils/res-type';
+  AppName,
+  LibbipName,
+  ResName,
+  ResPayload,
+  downloadArrayBuffer,
+} from './Utils';
+import { ResAsset, ResFile } from '../tools/res-file';
 
 async function getFile(url: string) {
   const { data } = await axios.get(url, {
@@ -88,13 +91,13 @@ export default function ResBuilder() {
 
   const buildResFile = async () => {
     setLoading(true);
-    const resData = await getResData(res);
+    const resData = await ResFile.fromURL(`/files/res/${res}`);
     const appsData = await Promise.all([
       getFile(`/files/libbip/${res.replace('.res', '.bin')}`),
       ...apps.map((appName) => getFile(`/files/app/${appName}`)),
     ]);
-    appsData.forEach((d) => resData.resTable.push(d));
-    const newResBin = await getResBinary(resData);
+    appsData.forEach((d) => resData.assets.push(new ResAsset(d)));
+    const newResBin = resData.pack();
     const newResName = 'RES_' + res.replace('.res', `_${Date.now()}.res`);
     downloadArrayBuffer(newResBin, newResName);
     setLoading(false);
@@ -138,6 +141,7 @@ export default function ResBuilder() {
             <SelectedApp i={-1} libbip={libbip} />
             {apps.map((appName, i) => (
               <SelectedApp
+                key={appName}
                 appName={appName}
                 i={i}
                 moveApp={moveApp}
@@ -294,7 +298,7 @@ export function ResSize({ res, apps }: ResPayload) {
       <br />
       <div className="progress" style={{ height: '2em' }}>
         <div
-          className="progress-bar"
+          className={`progress-bar ${sumSize > THRESHOLD_WARN ? "bg-danger" : ""}`}
           role="progressbar"
           style={{ width: precent + '%', fontSize: '1.3em' }}
         >
