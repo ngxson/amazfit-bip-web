@@ -1,0 +1,3 @@
+[submodule "res-tools"]
+	path = res-tools
+	url = git@github.com:ngxson/amazfit-bip-tools-ts.git

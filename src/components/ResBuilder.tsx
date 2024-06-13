@@ -12,7 +12,7 @@ import {
   ResPayload,
   downloadArrayBuffer,
 } from './Utils';
-import { ResAsset, ResFile } from '../tools/res-file';
+import { ResAsset, ResFile } from 'amazfit-bip-tools-ts';
 
 async function getFile(url: string) {
   const { data } = await axios.get(url, {
@@ -298,7 +298,7 @@ export function ResSize({ res, apps }: ResPayload) {
       <br />
       <div className="progress" style={{ height: '2em' }}>
         <div
-          className={`progress-bar ${sumSize > THRESHOLD_WARN ? "bg-danger" : ""}`}
+          className={`progress-bar ${sumSize > THRESHOLD_WARN ? 'bg-danger' : ''}`}
           role="progressbar"
           style={{ width: precent + '%', fontSize: '1.3em' }}
         >

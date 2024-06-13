@@ -13,6 +13,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "amazfit-bip-tools-ts": "file:res-tools",
     "axios": "^1.7.2",
     "file-saver": "^2.0.5",
     "prettier": "^3.3.2",
