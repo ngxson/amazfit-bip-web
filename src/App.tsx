@@ -4,6 +4,7 @@ import ResBuilder from './components/ResBuilder';
 import FileList from './components/FileList';
 import About from './components/About';
 import FWCredits from './components/FWCredits';
+import { Container, Navbar, Row } from 'react-bootstrap';
 
 class App extends React.Component {
   ResBuilder = () => {
@@ -29,8 +30,8 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-          <div className="container">
+        <Navbar className="navbar-expand-lg fixed-top navbar-dark bg-primary">
+          <Container>
             <a className="navbar-brand" href="#/">
               Amazfit Bip
             </a>
@@ -83,23 +84,23 @@ class App extends React.Component {
                 </li>
               </ul>
             </div>
-          </div>
-        </div>
+          </Container>
+        </Navbar>
 
-        <div className="container">
+        <Container>
           <br />
           <br />
           <br />
           <br />
-          <div className="row">
+          <Row>
             <HashRouter>
               <Route exact path="/" component={this.ResBuilder} />
               <Route path="/firmware" component={this.Firmware} />
               <Route path="/font" component={this.Font} />
               <Route path="/about" component={this.About} />
             </HashRouter>
-          </div>
-        </div>
+          </Row>
+        </Container>
       </>
     );
   }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
-import files from '../data/files.json';
+import files from '../../data/files.json';
 import {
   getELFSize,
   getELFMetadata,
@@ -11,8 +11,9 @@ import {
   ResName,
   ResPayload,
   downloadArrayBuffer,
-} from './Utils';
+} from '../Utils';
 import { ResAsset, ResFile } from 'amazfit-bip-tools-ts';
+import { Button, Col } from 'react-bootstrap';
 
 async function getFile(url: string) {
   const { data } = await axios.get(url, {
@@ -31,7 +32,7 @@ const DEFAULT_APPS: AppName[] = [
   'utility-flashlight-by-MNVolkov.elf',
 ];
 
-export default function ResBuilder() {
+export default function AppPicker() {
   const [loading, setLoading] = useState<boolean>(false);
   const [res, setRes] = useState<ResName | ''>('');
   const [apps, setApps] = useState<AppName[]>(DEFAULT_APPS);
@@ -105,15 +106,15 @@ export default function ResBuilder() {
 
   return (
     <>
-      <div className="col-12">
+      <Col xs={12}>
         <h1>Res Builder</h1>
         <p className="lead">
           {res ? 'Select apps to build a .res file' : 'Select your FW version'}
         </p>
-      </div>
+      </Col>
 
       {/* FW selector */}
-      <div className="col-sm-12 col-md-6 col-lg-6">
+      <Col sm={12} md={6}>
         <select
           onChange={(e) => setRes(e.target.value as any)}
           value={res}
@@ -126,13 +127,13 @@ export default function ResBuilder() {
             </option>
           ))}
         </select>
-      </div>
-      <div className="hidden-sm col-md-6 col-lg-6"></div>
+      </Col>
+      <Col sm={0} md={6}></Col>
 
       {res !== '' && (
         <>
           {/* App selector */}
-          <div className="col-sm-12 col-md-6 col-lg-6">
+          <Col sm={12} md={6}>
             <br />
             <br />
             Selected apps:
@@ -164,10 +165,10 @@ export default function ResBuilder() {
             <br />
             <br />
             <br />
-          </div>
+          </Col>
 
           {/* Show apps list */}
-          <div className="col-sm-12 col-md-6 col-lg-6">
+          <Col sm={12} md={6}>
             <br />
             <br />
             App list:
@@ -186,7 +187,7 @@ export default function ResBuilder() {
               ))}
             <br />
             <br />
-          </div>
+          </Col>
         </>
       )}
     </>
@@ -209,34 +210,34 @@ function SelectedApp({
   i: number;
 }) {
   return (
-    <div className="nui-app-item" key={appName}>
-      <button
-        className="btn btn-primary"
+    <div className="nui-app-item">
+      <Button
+        variant="primary"
         onClick={() => {
           moveApp?.('up', i);
         }}
         disabled={!appName}
       >
         ▲
-      </button>
+      </Button>
       &nbsp;
-      <button
-        className="btn btn-primary"
+      <Button
+        variant="primary"
         onClick={() => {
           moveApp?.('down', i);
         }}
         disabled={!appName}
       >
         ▼
-      </button>
+      </Button>
       &nbsp;
-      <button
-        className="btn btn-danger"
+      <Button
+        variant="danger"
         onClick={() => delApp?.(i)}
         disabled={!appName}
       >
         Delete
-      </button>
+      </Button>
       {appName && <AppLabel appName={appName} />}
       {res !== '' && (
         <>
