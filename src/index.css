@@ -47,3 +47,17 @@ a.forum::after {
 .app-label.watchface {
   background-color: #cca550;
 }
+
+.asset {
+  padding: 0.5em;
+  width: 100%;
+  margin-bottom: 1em;
+}
+.asset .img-view {
+  margin-bottom: 0.7em;
+  overflow: hidden;
+  height: 176px;
+  width: 176px;
+  border: 1px solid #aaa;
+  background-color: #ddd;
+}

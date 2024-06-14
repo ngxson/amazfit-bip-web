@@ -18,7 +18,7 @@ export interface ResPayload {
   apps: AppName[];
 }
 
-const byteToKB = (i: number) => `${Math.round(i / 1024)}KB`;
+export const byteToKB = (i: number) => `${Math.round(i / 1024)}KB`;
 
 export function getELFMetadata(filename: AppName) {
   return files.app[filename] || {};
@@ -39,3 +39,5 @@ export function getLibBipSize(filename: LibbipName) {
 export async function downloadArrayBuffer(buf: Uint8Array, filename: string) {
   saveAs(new Blob([buf], { type: 'application/octet-stream' }), filename);
 }
+
+export const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));

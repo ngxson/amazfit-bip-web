@@ -19,7 +19,7 @@ function FileList({
       <div className="col-12">
         <ul>
           {Object.keys(files[type]).map((filename) => (
-            <li>
+            <li key={filename}>
               <a href={`/files/${type}/${filename}`}>{filename}</a>
             </li>
           ))}

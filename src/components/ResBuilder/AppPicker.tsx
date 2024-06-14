@@ -1,19 +1,20 @@
 import axios from 'axios';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import files from '../../data/files.json';
 import {
   getELFSize,
   getELFMetadata,
-  getLibBipSize,
-  getResBaseSize,
   AppName,
-  LibbipName,
-  ResName,
-  ResPayload,
   downloadArrayBuffer,
 } from '../Utils';
-import { ResAsset, ResFile } from 'amazfit-bip-tools-ts';
-import { Button, Col } from 'react-bootstrap';
+import { ResAsset } from 'amazfit-bip-tools-ts';
+import { Button, Col, OverlayTrigger, Spinner, Tooltip } from 'react-bootstrap';
+import {
+  ResFileWrapped,
+  ResWrappedName,
+  getResByName,
+  loadAllRes,
+} from './ResUtils';
 
 async function getFile(url: string) {
   const { data } = await axios.get(url, {
@@ -31,38 +32,58 @@ const DEFAULT_APPS: AppName[] = [
   'utility-calculator-by-MNVolkov.elf',
   'utility-flashlight-by-MNVolkov.elf',
 ];
+const POSSIBLE_RES = [...Object.keys(files.res), 'custom'];
 
-export default function AppPicker() {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [res, setRes] = useState<ResName | ''>('');
+export default function AppPicker({
+  onChangeViewToEdit,
+}: {
+  onChangeViewToEdit(): void;
+}) {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [resName, setResName] = useState<ResWrappedName | null>(null);
+  const [resFile, setResFile] = useState<ResFileWrapped | null>(null);
   const [apps, setApps] = useState<AppName[]>(DEFAULT_APPS);
-
-  const libbip = useMemo(() => {
-    const ret: LibbipName | '' = res.replace('.res', '.bin') as any;
-    return ret;
-  }, [res]);
 
   // load saved data
   useEffect(() => {
-    const savedApps = JSON.parse(
-      localStorage.getItem(STORAGE_KEY_APPS) || 'null'
-    );
-    if (savedApps) {
-      setApps(savedApps.filter((a: string) => !!(files.app as any)[a]));
-    }
-    const savedRes = JSON.parse(
-      localStorage.getItem(STORAGE_KEY_RES) || 'null'
-    );
-    if (savedRes) {
-      setRes(savedRes);
-    }
+    (async () => {
+      await loadAllRes();
+      const savedApps = JSON.parse(
+        localStorage.getItem(STORAGE_KEY_APPS) || 'null'
+      );
+      if (savedApps) {
+        setApps(savedApps.filter((a: string) => !!(files.app as any)[a]));
+      }
+      const savedRes = JSON.parse(
+        localStorage.getItem(STORAGE_KEY_RES) || 'null'
+      );
+      if (savedRes) {
+        setResName(savedRes);
+      }
+      setLoading(false);
+    })();
   }, []);
+
+  // reload the actual file when resName is changed
+  useEffect(() => {
+    if (!resName) {
+      setResFile(null);
+      return;
+    }
+    (async () => {
+      setLoading(true);
+      setResFile((await getResByName(resName as any)) ?? null);
+      setLoading(false);
+    })();
+  }, [resName]);
 
   // save app data to localStorage whenever there is change
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY_RES, JSON.stringify(res));
+    if (resName) {
+      localStorage.setItem(STORAGE_KEY_RES, JSON.stringify(resName));
+    }
     localStorage.setItem(STORAGE_KEY_APPS, JSON.stringify(apps));
-  }, [res, apps]);
+  }, [resName, apps]);
 
   const addApp = (appName: AppName) => {
     setApps((apps) => [...apps, appName]);
@@ -90,16 +111,20 @@ export default function AppPicker() {
     setApps((apps) => apps.filter((_, j) => i != j));
   };
 
-  const buildResFile = async () => {
+  const exportResFile = async () => {
+    if (!resFile || !resName) return;
     setLoading(true);
-    const resData = await ResFile.fromURL(`/files/res/${res}`);
-    const appsData = await Promise.all([
-      getFile(`/files/libbip/${res.replace('.res', '.bin')}`),
-      ...apps.map((appName) => getFile(`/files/app/${appName}`)),
-    ]);
-    appsData.forEach((d) => resData.assets.push(new ResAsset(d)));
-    const newResBin = resData.pack();
-    const newResName = 'RES_' + res.replace('.res', `_${Date.now()}.res`);
+    const newResFile = resFile.clone();
+    const appsData = await Promise.all(
+      apps.map((appName) => getFile(`/files/app/${appName}`))
+    );
+    appsData.forEach((d) => newResFile.assets.push(new ResAsset(d)));
+    const newResBin = newResFile.pack();
+    const newResName =
+      'RES_' +
+      (resName.endsWith('res')
+        ? resName.replace('.res', `_${Date.now()}.res`)
+        : `_${Date.now()}.res`);
     downloadArrayBuffer(newResBin, newResName);
     setLoading(false);
   };
@@ -109,37 +134,49 @@ export default function AppPicker() {
       <Col xs={12}>
         <h1>Res Builder</h1>
         <p className="lead">
-          {res ? 'Select apps to build a .res file' : 'Select your FW version'}
+          {resName
+            ? 'Select apps to build a .res file'
+            : 'Select your FW version'}
         </p>
       </Col>
 
       {/* FW selector */}
-      <Col sm={12} md={6}>
-        <select
-          onChange={(e) => setRes(e.target.value as any)}
-          value={res}
-          className="form-select"
-        >
-          <option value={''}>...</option>
-          {Object.keys(files.res).map((res) => (
-            <option key={res} value={res}>
-              {res}
-            </option>
-          ))}
-        </select>
-      </Col>
-      <Col sm={0} md={6}></Col>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <Col sm={12} md={6}>
+            <select
+              onChange={(e) =>
+                setResName(
+                  e.target.value === '' ? null : (e.target.value as any)
+                )
+              }
+              value={resName || ''}
+              className="form-select"
+            >
+              <option value={''}>...</option>
+              {POSSIBLE_RES.map((res) => (
+                <option key={res} value={res}>
+                  {res}
+                </option>
+              ))}
+            </select>
+          </Col>
+          <Col sm={0} md={6}></Col>
+        </>
+      )}
 
-      {res !== '' && (
+      {resName && resFile && (
         <>
           {/* App selector */}
           <Col sm={12} md={6}>
             <br />
             <br />
+            <SystemAssets res={resFile} onEdit={onChangeViewToEdit} />
+            <br />
             Selected apps:
             <br />
-            <SelectedApp i={-1} res={res} />
-            <SelectedApp i={-1} libbip={libbip} />
             {apps.map((appName, i) => (
               <SelectedApp
                 key={appName}
@@ -151,16 +188,26 @@ export default function AppPicker() {
             ))}
             <br />
             <br />
-            <ResSize apps={apps} res={res} />
+            <ResSize apps={apps} res={resFile} />
             <br />
             <br />
-            <button
-              className="btn btn-primary"
-              onClick={buildResFile}
+            <Button
+              variant="primary"
+              onClick={exportResFile}
               disabled={loading}
             >
               {loading ? 'Exporting...' : 'Export .res file'}
-            </button>
+            </Button>
+            <br />
+            <br />
+            <Button
+              variant="secondary"
+              onClick={() => setApps(DEFAULT_APPS)}
+              disabled={loading}
+            >
+              Reset
+            </Button>
+            <br />
             <br />
             <br />
             <br />
@@ -190,7 +237,57 @@ export default function AppPicker() {
           </Col>
         </>
       )}
+
+      {resName === 'custom' && !resFile && (
+        <>
+          <Col sm={12} md={6}>
+            <br />
+            You haven't yet created a custom .res file.
+            <br />
+            <br />
+            <Button
+              variant="primary"
+              onClick={onChangeViewToEdit}
+              disabled={loading}
+            >
+              Create new .res file
+            </Button>
+          </Col>
+        </>
+      )}
     </>
+  );
+}
+
+function SystemAssets({
+  res,
+  onEdit,
+}: {
+  res: ResFileWrapped;
+  onEdit(): void;
+}) {
+  const renderTooltip = (props: any) => (
+    <Tooltip {...props}>Select "custom" res to edit system assets</Tooltip>
+  );
+
+  const renderEditBtn = () => (
+    <Button variant="primary" onClick={onEdit} disabled={res.name !== 'custom'}>
+      Edit
+    </Button>
+  );
+
+  return (
+    <div className="nui-app-item">
+      {res.name === 'custom' ? (
+        renderEditBtn()
+      ) : (
+        <OverlayTrigger placement="bottom" overlay={renderTooltip}>
+          <span>{renderEditBtn()}</span>
+        </OverlayTrigger>
+      )}
+      &nbsp;<span className="app-label system">system</span>
+      &nbsp;system assets ({byteToKB(res.file.size())})
+    </div>
   );
 }
 
@@ -199,14 +296,10 @@ function SelectedApp({
   delApp,
   appName,
   i,
-  libbip = '',
-  res = '',
 }: {
   appName?: AppName;
   moveApp?(direction: 'up' | 'down', i: number): void;
   delApp?(i: number): void;
-  libbip?: LibbipName | '';
-  res?: ResName | '';
   i: number;
 }) {
   return (
@@ -231,26 +324,10 @@ function SelectedApp({
         ▼
       </Button>
       &nbsp;
-      <Button
-        variant="danger"
-        onClick={() => delApp?.(i)}
-        disabled={!appName}
-      >
+      <Button variant="danger" onClick={() => delApp?.(i)} disabled={!appName}>
         Delete
       </Button>
       {appName && <AppLabel appName={appName} />}
-      {res !== '' && (
-        <>
-          &nbsp;<span className="app-label system">system</span>
-          &nbsp;system assets ({getResBaseSize(res)})
-        </>
-      )}
-      {libbip !== '' && (
-        <>
-          &nbsp;<span className="app-label system">system</span>
-          &nbsp;system library (libbip) ({getLibBipSize(libbip)})
-        </>
-      )}
     </div>
   );
 }
@@ -283,11 +360,17 @@ function AppLabel({ appName }: { appName: AppName }) {
 }
 
 const byteToKB = (i: number) => `${Math.round(i / 1024)}KB`;
-export function ResSize({ res, apps }: ResPayload) {
+
+export function ResSize({
+  res,
+  apps,
+}: {
+  res: ResFileWrapped;
+  apps: AppName[];
+}) {
   const THRESHOLD_WARN = 750 * 1024;
   const MAX_RES_SIZE = 800 * 1024;
-  const libbip = res.replace('.res', '.bin') as any as LibbipName;
-  let sumSize = files.res[res].size + files.libbip[libbip].size;
+  let sumSize = res.file.size();
   for (const app of apps) {
     sumSize += files.app[app].size;
   }
